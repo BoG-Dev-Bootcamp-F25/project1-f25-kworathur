@@ -18,6 +18,27 @@ export type Train = {
     TRIP_ID: string;
 }
 
+export const stationData = [
+  "Doraville",
+  "Chamblee",
+  "Brookhaven",
+  "Lenox",
+  "Lindbergh Center",
+  "Arts Center",
+  "Midtown",
+  "North Avenue",
+  "Civic Center",
+  "Peachtree Center",
+  "Five Points",
+  "Garnett",
+  "West End",
+  "Oakland City",
+  "Lakewood/Ft. McPherson",
+  "East Point",
+  "College Park",
+  "Airport"
+]
+
 export const trainData = [
     {
     "DESTINATION": "AIRPORT",
@@ -277,12 +298,22 @@ export const trainData = [
 ]
 
 const Train = ({id, data}: {id: number, data: {train: Train, line: Line}}) => {
-    return ( <div key={id} className='flex'>
-        <div>
-            M
+    return ( <div key={id} className='w-full h-32 flex border-2 border-black'>
+        <div className='flex items-center justify-center'>
+          <div className='text-4xl p-4'>
+           M
+          </div>
         </div>
-        <div className='w-32 h-32'>
-            {data.train.STATION} {data.train.DESTINATION}
+        <div className='flex-2 text-left flex flex-col justify-around'>
+          <p>
+            {data.train.STATION} {`-->`} {data.train.DESTINATION}
+          </p>
+          <p className='pt-2'>
+            <span style={{backgroundColor: data.line.hexCode}} className='p-2'>{data.line.name}</span> {data.train.DELAY !== 'TOS' ? <span className='text-red-600'>Delayed</span> : <span className='text-green-600'>On Time</span>} 
+          </p>
+        </div>
+        <div className='flex flex-1 items-center justify-center'>
+          {data.train.WAITING_TIME}
         </div>
         
     </div> );
