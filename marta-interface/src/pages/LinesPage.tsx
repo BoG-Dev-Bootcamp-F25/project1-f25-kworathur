@@ -24,8 +24,16 @@ const LinesPage = () => {
     // });
     return ( <>
         {loading && <p>Loading... </p>}
-        <NavBar activeLine={currLine} setActiveLine={setCurrLine}/>
-        <TrainList line={currLine} stations={stationData.map(s => {return {name: s}})} trains={trainData.map(d => { return {...d, line: currLine}})} />
+        <div className='h-full flex flex-col'>
+            <div>
+                <NavBar activeLine={currLine} setActiveLine={setCurrLine}/>
+            </div>
+            <div className='flex flex-1'>
+                <TrainList line={currLine} stations={stationData.map(s => {return {name: s}})} trains={trainData.map(d => { return {...d, line: currLine}})} />
+            </div>
+            
+        </div>
+        
     </> );
 }
  

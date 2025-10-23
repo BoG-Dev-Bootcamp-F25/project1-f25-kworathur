@@ -49,18 +49,18 @@ const TrainList = ({line, stations, trains}: TrainList) => {
             })
     
 
-    return <div className='mt-2 w-full flex'>
+    return <div className='mt-2 w-full flex-1 flex'>
         <div className='min-w-32 bg-slate-900 text-white flex flex-col flex-1'>
             <h4>Select your starting station:</h4>
-            <div className='mt-2 text-left flex-1 y-overflow flex flex-col'>
+            <div className='mt-2 text-left flex-1 y-overflow'>
                  {[{name: 'All Stations'}, ...stations].map((s, i) => 
-                    <div key={i} className='flex-1  min-h-8 max-h-16 border-b-4'><a  className='text-left pl-4' onClick={() => setDestStation(s)}>{s.name}</a></div>)}
+                    <div key={i} className='max-h-8 border-b-4'><a  className='text-left pl-4' onClick={() => setDestStation(s)}>{s.name}</a></div>)}
             </div>
         </div>
         <div className='flex-3'>
             <div className='mt-4 flex justify-around'>
                 {filters.map((ftr, i) => {
-                    return <div key={i} className='hover:cursor-pointer border-1 rounded-sm p-2 pl-4 pr-4' onClick={() => setActiveFilters((value) => {
+                    return <div key={i} style={{borderWidth: activeFilters.includes(ftr) ? '2px' : '1px'}} className='hover:cursor-pointer border-1 rounded-sm p-2 pl-4 pr-4' onClick={() => setActiveFilters((value) => {
                         
                         if (value.includes(ftr)) {
                             console.log('Disabling filter ', ftr)
