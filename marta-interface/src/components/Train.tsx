@@ -1,6 +1,6 @@
 import type { Line } from "../pages/LinesPage";
 
-export type Train = {
+export type TrainType = {
     DESTINATION: string;
     DIRECTION: string;
     EVENT_TIME: string;
@@ -297,7 +297,7 @@ export const trainData = [
   },
 ]
 
-const Train = ({id, data}: {id: number, data: {train: Train, line: Line}}) => {
+const Train = ({id, data}: {id: number, data: {train: TrainType, line: Line}}) => {
     return ( <div key={id} className='w-full h-32 flex border-2 border-black'>
         <div className='flex items-center justify-center'>
           <div className='text-4xl p-4'>
@@ -309,7 +309,7 @@ const Train = ({id, data}: {id: number, data: {train: Train, line: Line}}) => {
             {data.train.STATION} {`-->`} {data.train.DESTINATION}
           </p>
           <p className='pt-2'>
-            <span style={{backgroundColor: data.line.hexCode}} className='p-2'>{data.line.name}</span> {data.train.DELAY !== 'TOS' ? <span className='text-red-600'>Delayed</span> : <span className='text-green-600'>On Time</span>} 
+            <span style={{backgroundColor: data.line.hexCode}} className='p-2'>{data.line.name}</span> {data.train.DELAY !== 'TOS' ? <span className='text-red-600 ml-4'>Delayed</span> : <span className='text-green-600 ml-4'>On Time</span>} 
           </p>
         </div>
         <div className='flex flex-1 items-center justify-center'>

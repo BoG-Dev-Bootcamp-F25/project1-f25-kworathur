@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import TrainList from "../components/TrainList";
-import { stationData, trainData, type Train } from "../components/Train";
+import { stationData, trainData} from "../components/Train";
+import type { TrainType } from "../components/Train";
 import NavBar, { lines } from "../components/NavBar";
 
 
@@ -13,7 +14,7 @@ export type Line = {
 const LinesPage = () => {
 
     const [currLine, setCurrLine] = useState<Line>(lines[0]); 
-    const [data, setData] = useState<Array<Train> | null>(null);
+    const [data, setData] = useState<Array<TrainType> | null>(null);
     const [loading, setLoading] = useState(false);
 
     // useEffect(() => {
@@ -24,7 +25,7 @@ const LinesPage = () => {
     return ( <>
         {loading && <p>Loading... </p>}
         <NavBar activeLine={currLine} setActiveLine={setCurrLine}/>
-        <TrainList color={currLine} stations={stationData.map(s => {return {name: s}})} trains={trainData.map(d => { return {...d, line: currLine}})} />
+        <TrainList line={currLine} stations={stationData.map(s => {return {name: s}})} trains={trainData.map(d => { return {...d, line: currLine}})} />
     </> );
 }
  
