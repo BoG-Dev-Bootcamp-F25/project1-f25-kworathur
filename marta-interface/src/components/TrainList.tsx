@@ -17,29 +17,29 @@ type TrainList = {
 
 const TrainList = ({line, stations, trains}: TrainList) => {
 
-    const [destStation, setDestStation] = useState<StationType>({name: ''});
+    const [destStation, setDestStation] = useState<StationType>({name: 'All Stations'});
     const [activeFilters, setActiveFilters] = useState<string[]>([])
     
-    const directionOfTravel = (line.name === 'Gold' || line.name === 'Red') ?  ["Northbound", "Southbound"]: ["Eastbound", "Westbound"]
+    const directionOfTravel = (line.name === 'gold' || line.name === 'red') ?  ["Northbound", "Southbound"]: ["Eastbound", "Westbound"]
     const filters = ["Arriving", "Scheduled",   ...directionOfTravel  ]
 
-    const filteredTrains = trains.filter(t => destStation.name === 'All Stations' || t.STATION === destStation.name)
+    const filteredTrains = trains.filter(t => destStation.name === 'All Stations' || t.STATION.toLowerCase().includes(destStation.name.toLowerCase()))
                                  .filter(t => {
 
-                                    if (activeFilters.includes('Arriving')) {
-                                        return +(t.WAITING_SECONDS) < 1000
+                                    if (activeFilters.includes('Arriving') && +(t.WAITING_SECONDS) >= 1000) {
+                                        return false;
                                     }
 
-                                    if (activeFilters.includes('Scheduled')) {
-                                        return +(t.WAITING_SECONDS) >= 1000
+                                    if (activeFilters.includes('Scheduled') && +(t.WAITING_SECONDS) < 1000) {
+                                        return false;
                                     }
 
                                     if (activeFilters.includes('Northbound') || activeFilters.includes('Eastbound')) {
-                                        return (activeFilters.includes('Northbound') && t.DIRECTION === 'N') || (activeFilters.includes('Eastbound') || t.DIRECTION === 'E')
+                                        return (activeFilters.includes('Northbound') && t.DIRECTION === 'N') || (activeFilters.includes('Eastbound') && t.DIRECTION === 'E')
                                     }
 
                                     if (activeFilters.includes('Southbound') || activeFilters.includes('Westbound')) {
-                                        return (activeFilters.includes('Southbound') && t.DIRECTION === 'S') || (activeFilters.includes('Westbound') || t.DIRECTION === 'W')
+                                        return (activeFilters.includes('Southbound') && t.DIRECTION === 'S') || (activeFilters.includes('Westbound') && t.DIRECTION === 'W')
                                     }
                                     
                                     return true;

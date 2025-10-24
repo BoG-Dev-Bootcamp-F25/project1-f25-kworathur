@@ -7,33 +7,36 @@ import NavBar, { lines } from "../components/NavBar";
 
 const API_BASE_URL = 'https://midsem-bootcamp-api.onrender.com'
 export type Line = {
-    name: 'Blue' | 'Gold' | 'Red' | 'Green'
+    name: 'blue' | 'gold' | 'red' | 'green'
     hexCode: string
 } 
 
-const LinesPage = () => {
+const LinesPage = ({line} : {line: Line}) => {
 
-    const [currLine, setCurrLine] = useState<Line>(lines[0]); 
-    const [data, setData] = useState<Array<TrainType> | null>(null);
+    const [data, setData] = useState<{stations: string[], trains: TrainType[]}>({stations: [], trains: []});
     const [loading, setLoading] = useState(false);
 
-    // useEffect(() => {
-    //     const url = `${API_BASE_URL}/arrivals/${currLine}`
-    //     fetch(url).then(response => response.json()).then(data => {
-    //         setData(data); setLoading(false)})
-    // });
+    useEffect(() => {
+        setLoading(true);
+        const arrivalsUrl = `${API_BASE_URL}/arrivals/${line.name}`
+        fetch(arrivalsUrl).then(response => response.json()).then(newTrains => {
+            setData((data) => {return {...data, trains: newTrains}})})
+        
+        const stationsUrl = `${API_BASE_URL}/stations/${line.name}`
+        fetch(stationsUrl).then(response => response.json()).then(newStations => {
+            setData((data) => {return { ...data, stations: newStations}}); setLoading(false)})
+    }, [line]);
+
     return ( <>
         {loading && <p>Loading... </p>}
         <div className='h-full flex flex-col'>
             <div>
-                <NavBar activeLine={currLine} setActiveLine={setCurrLine}/>
+                <NavBar activeLine={line}/>
             </div>
             <div className='flex flex-1'>
-                <TrainList line={currLine} stations={stationData.map(s => {return {name: s}})} trains={trainData.map(d => { return {...d, line: currLine}})} />
+                {loading ? <p>Loading ...</p> : <TrainList line={line} stations={data.stations.map(s => {return {name: s}})} trains={data.trains.map(d => { return {...d, line: line}})} />}
             </div>
-            
         </div>
-        
     </> );
 }
  

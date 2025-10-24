@@ -309,7 +309,7 @@ const Train = ({id, data}: {id: number, data: {train: TrainType, line: Line}}) =
             {data.train.STATION} {`-->`} {data.train.DESTINATION}
           </p>
           <p className='pt-2'>
-            <span style={{backgroundColor: data.line.hexCode}} className='p-2'>{data.line.name}</span> {data.train.DELAY !== 'TOS' ? <span className='text-red-600 ml-4'>Delayed</span> : <span className='text-green-600 ml-4'>On Time</span>} 
+            <span style={{backgroundColor: data.line.hexCode}} className='p-2'>{data.line.name.at(0)?.toUpperCase() + data.line.name.slice(1)}</span> {data.train.DELAY !== 'T0S' ? <span className='text-red-600 ml-4'>Delayed</span> : <span className='text-green-600 ml-4'>On Time</span>} 
           </p>
         </div>
         <div className='flex flex-1 items-center justify-center'>
