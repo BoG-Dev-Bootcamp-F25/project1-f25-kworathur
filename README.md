@@ -20,6 +20,8 @@ Create a 0.5-2 minute demo video to showcase your project's functionality (this 
 
 - **Due Date**: 10-14-25
 
+(2025-10-23) Link to demo video: ()[]
+
 ## Instructions
 
 In the pages folder, create a page component named `LinesPage.tsx`, this page will display the entire interface. Also, create a component called `TrainList.tsx`. This component should have a prop specifying the line color (i.e. blue, gold, red, or green), and would contain the interface for all trains in the given line. The current line that's being displayed should be stored as a state in the LinesPage component. Here's some barebones code for some idea of what the structure should look like:
