@@ -20,7 +20,7 @@ Create a 0.5-2 minute demo video to showcase your project's functionality (this 
 
 - **Due Date**: 10-14-25
 
-(2025-10-23) Link to demo video: ()[]
+Link to submission: [Google Drive](https://drive.google.com/file/d/1Sg6R74FZZ3mtcVrv7MiX8qv6XuuRWfxJ/view?usp=drive_link)
 
 ## Instructions
 
